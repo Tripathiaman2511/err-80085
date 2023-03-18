@@ -185,8 +185,41 @@ contract Account{
         return (_dataName,_dataHash,_isSeen,_patient,_patientName,_patientAge,_description);
     }
 
-    // function sendDiagnosis() public {
+    function sendDiagnosis(string memory _dataName,string memory _hash,string memory _des,address _to) public {
+        address _owner = msg.sender;
+        data memory tempData;
+        tempData.dataName = _dataName;
+        tempData.enc_hash = _hash;
+        tempData.description = _des;
+        tempData.owner = _owner;
+        dataInfo[tempData.enc_hash] = tempData;
+        doctorInfo[_owner].diagnosisHash.push(tempData.enc_hash);
+        patientInfo[_to].diagnosisHash.push(tempData.enc_hash);
 
-    // }
-    
+    }
+
+    function getDiagnosisHistory() public view returns (string[] memory, string[] memory, string[] memory, string[] memory,string[] memory,string[] memory,uint[] memory){
+        address _owner = msg.sender;
+        uint n = patientInfo[_owner].diagnosisHash.length;
+        string[] memory _fileName = new string[](n);
+        string[] memory _ipfsHash = new string[](n);
+        string[] memory _fileDesc = new string[](n);
+        string[] memory _doctorName = new string[](n);
+        string[] memory _desc = new string[](n);
+        uint[] memory _age = new uint[](n);
+        patient memory tempPatient = patientInfo[_owner];
+        for(uint i=0;i<n;i++){
+        
+            data memory tempData = dataInfo[tempPatient.diagnosisHash[i]];
+            _fileName[i] = tempData.dataName;
+            _ipfsHash[i] = tempData.enc_hash;
+            _fileDesc[i] = tempData.description;
+            doctor memory tempDoc = doctorInfo[tempData.owner];
+            _doctorName[i] = tempDoc.name;
+            _age[i] = tempDoc.age;
+            _desc[i] = tempDoc.description;
+        }
+
+        return (_fileName,_ipfsHash,_fileDesc,_fileDesc,_doctorName,_desc,_age);
+    }   
 }
