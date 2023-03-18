@@ -28,6 +28,7 @@ function EditUser() {
                 console.log(patientInfo)
                 console.log(hash)
                 navigate(-1)
+                console.log(patientInfo)
             })
 
            
