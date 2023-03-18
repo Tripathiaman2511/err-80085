@@ -90,14 +90,24 @@ function MedicalHistory() {
       })
     }
     }
+
+    // Send Data User
+    const sendData=async(value)=>{
+      console.log("Need a doctor Side")
+    }
   return (
     <>
     <div>
     <h1>Medical History</h1>
     <div>
         {/* Add map function to read all files  */}
-    <h3>Record Name</h3>
-    <button>Share</button>
+   {record?(record.map((value)=>{
+    return (
+    <div key={value.hash}>
+      <h1>{value.hash}</h1>
+      <button onClick={(value)=>sendData(value)}>SendData</button>
+    </div>)
+   })):(<>No Data Found</>)}
     </div>
     </div>
     <div>

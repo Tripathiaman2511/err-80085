@@ -23,6 +23,7 @@ function App() {
              <Route path='mhistory' element={<MedicalHistory/>}/>
              <Route path='diagnosis' element={<Diagnosis/>}/>
              </Route>  
+             
               <Route path='/edit' element={<EditUser/>}/>
             
            </Routes>
