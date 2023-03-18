@@ -27,7 +27,8 @@ function EditUser() {
                 const patientInfo=await getAccount.methods.getPatientInfo().call({from:user})
                 console.log(patientInfo)
                 console.log(hash)
-                navigate(-1)
+
+                navigate('/patient',{state:{patientInfo}})
                 console.log(patientInfo)
             })
 
@@ -42,7 +43,7 @@ function EditUser() {
             event.preventDefault()
             setName(event.target.value)
         }} />
-        <h2>Age: {user[1]}</h2>
+        <h2>Age: {parseInt(userData[1])}</h2>
         <input type="text" event={user[1]} onChange={(event)=>{
             event.preventDefault()
             setAge(event.target.value)
