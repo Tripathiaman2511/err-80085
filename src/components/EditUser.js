@@ -24,12 +24,11 @@ function EditUser() {
             await getAccount.methods.editPatientInfo(name,parseInt(age)).send({from:user})
             
             .on('transactionHash',async(hash)=>{
-                const patientInfo=await getAccount.methods.getPatientInfo().call({from:user})
-                console.log(patientInfo)
+                
                 console.log(hash)
 
-                navigate('/patient',{state:{patientInfo}})
-                console.log(patientInfo)
+                navigate(-1)
+               
             })
 
            
