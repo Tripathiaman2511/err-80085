@@ -13,6 +13,7 @@ contract Account{
         bool created;
         address[] concernDoctor;
         string[] dataHash;
+        string[] diagnosisHash;
     }
 
 
@@ -23,7 +24,7 @@ contract Account{
         bool created;
         string description;
         string[] requestedDataHash;
-      
+        string[] diagnosisHash;
     }
 
     struct data {
@@ -38,13 +39,15 @@ contract Account{
         string dataHash;
         bool isSeen;
         address from;
+        string description;
     }
+
 
     mapping(address => patient) patientInfo;
     mapping(address => doctor) doctorInfo;
     mapping(string => data) dataInfo;
     mapping(string => requestedData) requestedDataInfo;
-
+    mapping(string =>data) diagnosisInfo;
     address[] doctorList;
 
     function getPatientInfo() public view returns (string memory, uint, address[] memory, string[] memory){
@@ -96,7 +99,7 @@ contract Account{
         doctorList.push(owner);
     }
     
-     function add_records(string memory _name,string memory _hash, string memory _description) public {
+     function addRecord(string memory _name,string memory _hash, string memory _description) public {
         
         address _owner = msg.sender;
 
@@ -146,16 +149,18 @@ contract Account{
         return (_dataName,_hash,_des);
     }
 
-    function sendRecord(address _to,string memory _record_hash) public{
+    function sendRecord(address _to,string memory _record_hash,string memory _description) public{
         requestedData memory tempRequested;
         tempRequested.dataHash = _record_hash;
         tempRequested.isSeen = false;
         tempRequested.from = msg.sender;
+        tempRequested.description = _description;
+        patientInfo[msg.sender].concernDoctor.push(_to);
         requestedDataInfo[_record_hash] = tempRequested;
         doctorInfo[_to].requestedDataHash.push(_record_hash);
     }
 
-    function getDoctorsRequestedData() public view returns (string[] memory,string[] memory, bool[] memory,address[] memory,string[] memory,uint[] memory){
+    function getDoctorsRequestedData() public view returns (string[] memory,string[] memory, bool[] memory,address[] memory,string[] memory,uint[] memory,string[] memory){
         uint n = doctorInfo[msg.sender].requestedDataHash.length;
         string[] memory _dataName = new string[](n);
         string[] memory _dataHash = new string[](n);
@@ -163,6 +168,7 @@ contract Account{
         address[] memory _patient= new address[](n);
         string[] memory _patientName = new string[](n);
         uint[] memory _patientAge = new uint[](n);
+        string[] memory _description = new string[](n);
 
 
         for(uint i; i<n;i++){
@@ -173,10 +179,14 @@ contract Account{
             _patient[i] = tempReq.from;
             _patientName[i] =  patientInfo[tempReq.from].name;
             _patientAge[i] = patientInfo[tempReq.from].age;
+            _description[i] = tempReq.description;
         }
 
-        return (_dataName,_dataHash,_isSeen,_patient,_patientName,_patientAge);
+        return (_dataName,_dataHash,_isSeen,_patient,_patientName,_patientAge,_description);
     }
 
+    // function sendDiagnosis() public {
 
+    // }
+    
 }
