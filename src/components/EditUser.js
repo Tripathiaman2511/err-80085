@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Web3 from 'web3'
 import Application from '../abis/Account.json'
+import { DataContext } from './Login'
 function EditUser() {
+    const {user}=useContext(DataContext)
     const location =useLocation()
-    const [user,setUser]=useState(location.state)
+    const [userData,setUserData]=useState(location.state)
     const[name,setName]=useState()
     const[age,setAge]=useState()    
+    const navigate =useNavigate()
     
     console.log(user)
     const submit=async()=>{
@@ -14,16 +17,23 @@ function EditUser() {
         const networkId =await web3.eth.net.getId()
         const networkData=Application.networks[networkId]
 
+
         if(networkData){
-           
+           console.log(typeof name, typeof age)
             const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
-            getAccount.methods.editPatientInfo()
+            await getAccount.methods.editPatientInfo(name,parseInt(age)).send({from:user})
+            .on('transactionHash',async(hash)=>{
+                const patientInfo=await getAccount.methods.getPatientInfo().call()
+                console.log(hash)
+            })
+
+           
         }
     }
   return (
     <>
     <div>
-        <h1>Name: {user[0]}</h1>
+        <h1>Name: {userData[0]}</h1>
         <input type="text" event={user[0]} onChange={(event)=>{
             event.preventDefault()
             setName(event.target.value)

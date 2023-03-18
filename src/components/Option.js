@@ -19,7 +19,7 @@ function Option() {
         const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
        const patientInfo=await getAccount.methods.getPatientInfo().call()
      if(patientInfo){
-     
+      console.log(patientInfo)
       navigate('/patient',{state:{patientInfo}})
      }
       
