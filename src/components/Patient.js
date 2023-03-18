@@ -7,33 +7,20 @@ import { useNavigate } from 'react-router-dom'
 function Patient() {
 
  
-  const [record,setRecord]=useState([])
+ 
   const navigate=useNavigate()
   const {user}=useContext(DataContext)
   const[patientInfo,setPatientInfo]=useState()
   const [loading,setLoading]=useState(true)
    useEffect(() => {
-    getRecord()
+   
 
     handlePatient(()=>{
       setLoading(false)
     })
   
   }, [])
-  const getRecord=async()=>{
-    const web3 =new Web3(window.ethereum)
-     const networkId =await web3.eth.net.getId()
-     const networkData=Application.networks[networkId]
-     if(networkData){
-      const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
-      const dataRecord=await getAccount.methods.getRecords().call({from:user})
-      if(dataRecord){
-       console.log(dataRecord)
-      }
-   
-      
-    }
-  }
+
   
   const handlePatient=async (clbk)=>{
     
