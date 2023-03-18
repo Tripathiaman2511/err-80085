@@ -198,7 +198,7 @@ contract Account{
 
     }
 
-    function getDiagnosisHistory() public view returns (string[] memory, string[] memory, string[] memory, string[] memory,string[] memory,string[] memory,uint[] memory){
+    function getDiagnosisHistory() public view returns (string[] memory, string[] memory, string[] memory,string[] memory,string[] memory,uint[] memory){
         address _owner = msg.sender;
         uint n = patientInfo[_owner].diagnosisHash.length;
         string[] memory _fileName = new string[](n);
@@ -220,6 +220,15 @@ contract Account{
             _desc[i] = tempDoc.description;
         }
 
-        return (_fileName,_ipfsHash,_fileDesc,_fileDesc,_doctorName,_desc,_age);
+        return (_fileName,_ipfsHash,_fileDesc,_doctorName,_desc,_age);
     }   
+
+    function deleteRecord(string memory _dataHash) public{
+        address _owner = msg.sender;
+        data memory tempData = dataInfo[_dataHash];
+        require(tempData.owner==_owner);
+        delete dataInfo[_dataHash];
+        delete requestedDataInfo[_dataHash];
+        delete diagnosisInfo[_dataHash];
+    }
 }
