@@ -14,17 +14,20 @@ function EditUser() {
     console.log(user)
     const submit=async()=>{
         const web3 =new Web3(window.ethereum)
-        const networkId =await web3.eth.net.getId()
+        const networkId = await web3.eth.net.getId()
         const networkData=Application.networks[networkId]
 
 
         if(networkData){
-           console.log(typeof name, typeof age)
+           console.log(networkData)
             const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
             await getAccount.methods.editPatientInfo(name,parseInt(age)).send({from:user})
+            
             .on('transactionHash',async(hash)=>{
-                const patientInfo=await getAccount.methods.getPatientInfo().call()
+                const patientInfo=await getAccount.methods.getPatientInfo().call({from:user})
+                console.log(patientInfo)
                 console.log(hash)
+                navigate(-1)
             })
 
            

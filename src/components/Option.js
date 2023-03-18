@@ -1,11 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { DataContext } from './Login'
 import Web3 from 'web3'
 import Application from '../abis/Account.json'
 
 function Option() {
-  
+  const {user}=useContext(DataContext)
   const navigate=useNavigate()
  // const[account,SetAccount]=useState(null)
  
@@ -17,7 +17,7 @@ function Option() {
     if(networkData){
        
         const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
-       const patientInfo=await getAccount.methods.getPatientInfo().call()
+       const patientInfo=await getAccount.methods.getPatientInfo().call({from:user})
      if(patientInfo){
       console.log(patientInfo)
       navigate('/patient',{state:{patientInfo}})
