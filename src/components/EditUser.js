@@ -25,6 +25,7 @@ function EditUser() {
             .on('transactionHash',async(hash)=>{
                 const patientInfo=await getAccount.methods.getPatientInfo().call()
                 console.log(hash)
+                console.log(patientInfo)
             })
 
            
