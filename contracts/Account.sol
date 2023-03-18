@@ -99,7 +99,7 @@ contract Account{
         doctorList.push(owner);
     }
     
-     function addRecords(string memory _name,string memory _hash, string memory _description) public {
+     function addRecord(string memory _name,string memory _hash, string memory _description) public {
         
         address _owner = msg.sender;
 
