@@ -97,6 +97,7 @@ module.exports = {
     //   production: true    // Treats this network as if it was a public net. (default: false)
     // }
   },
+  contracts_build_directory:'./src/abis/',
 
   // Set default mocha options here, use special reporters, etc.
   mocha: {

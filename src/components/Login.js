@@ -5,7 +5,7 @@ function Login({children}) {
 
     const [loading,setLoading]=useState(false)
     const [isUser,setIsUser]=useState(false)
-    const[account,setAccount]=useState('')
+    const[user,setUser]=useState('')
     
     useEffect(()=>{
         loadWeb3()
@@ -15,9 +15,11 @@ function Login({children}) {
         const web3=new Web3(window.ethereum)
         const accounts=await web3.eth.getAccounts()
        
-        setAccount(accounts[0])
-        setLoading(false)
+          setUser(accounts[0])
+          setLoading(false)
           setIsUser(true)
+        
+        
         
       }else{
         console.log("Install Meta Mask")
@@ -40,7 +42,7 @@ function Login({children}) {
   return (
 
     <div>
-        <DataContext.Provider value={{account}}>
+        <DataContext.Provider value={{user}}>
           {children}
         </DataContext.Provider>
         

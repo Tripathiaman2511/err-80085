@@ -8,13 +8,14 @@ import Patient from './components/Patient';
 
 import MedicalHistory from './components/MedicalHistory';
 import Diagnosis from './components/Diagnosis';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <>
     
            <Login>
-           
+           <Navbar/>
            <Routes>
              <Route path='/' element={<Option/>}/>
              <Route path='/patient' element={<Patient/>}>
