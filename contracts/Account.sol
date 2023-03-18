@@ -55,12 +55,9 @@ contract Account{
     }
 
     function setPatientInfo(string memory _name,uint _age, bool _created) internal{
-        
-        patient memory tempPatient;
-        tempPatient.name = _name;
-        tempPatient.age = _age;
-        tempPatient.created = _created;
-        patientInfo[msg.sender] = tempPatient;
+        address[] memory _concernDoctor;
+        string[] memory _dataHash;
+        patientInfo[msg.sender] = patient(_name,_age,_created,_concernDoctor,_dataHash);
     }
 
     function editPatientInfo(string memory _name,uint _age) public{
@@ -177,4 +174,6 @@ contract Account{
 
         return (_dataName,_dataHash,_isSeen,_patient,_patientName,_patientAge);
     }
+
+
 }
