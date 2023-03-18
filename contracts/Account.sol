@@ -4,7 +4,7 @@ pragma solidity >=0.4.16 <0.9.0;
 contract Account{
     
     constructor(){
-        setPatientInfo("",0,false);
+        setPatientInfoIntern("",0,false);
     }
     struct patient{
         string name;
@@ -29,13 +29,17 @@ contract Account{
         return (patientInfo[owner].name,patientInfo[owner].age,patientInfo[owner].concernDoctor,patientInfo[owner].dataHash);
     }
 
-    function setPatientInfo(string memory _name,uint _age, bool _created) public{
+    function setPatientInfoIntern(string memory _name,uint _age, bool _created) internal{
         
         patient memory tempPatient;
         tempPatient.name = _name;
         tempPatient.age = _age;
         tempPatient.created = _created;
         patientInfo[msg.sender] = tempPatient;
+    }
+
+    function setPatientInfo(string memory _name,uint _age) public{
+        setPatientInfoIntern(_name,_age,true);
     }
 
 
