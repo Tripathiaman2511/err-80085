@@ -1,13 +1,19 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { DataContext } from './Login'
 
 function Option() {
+   const {account}=useContext(DataContext)
   const navigate=useNavigate()
 
   return (
     <>
-    <button onClick={()=>navigate('/patient')} >Patient</button>
+   {account?(<h1>{account}</h1>):('')}
+    <button >Patient</button>
     <button onClick={()=>navigate('/doctor')}>Doctor</button>
+        
+    
+  
     </>
   )
 }
