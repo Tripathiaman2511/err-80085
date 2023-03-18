@@ -14,9 +14,7 @@ function Login({children}) {
       
       if(window.ethereum){
         const web3=new Web3(window.ethereum)
-        if(web3.isConnected()){
-          console.log("Yes")
-        }
+          
         const accounts=await web3.eth.getAccounts()
         console.log(accounts)
           setUser(accounts[0])
