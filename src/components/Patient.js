@@ -5,16 +5,22 @@ import Application from '../abis/Account.json'
 import { DataContext } from './Login'
 import { useNavigate } from 'react-router-dom'
 function Patient() {
+
+ 
+ 
   const navigate=useNavigate()
   const {user}=useContext(DataContext)
   const[patientInfo,setPatientInfo]=useState()
   const [loading,setLoading]=useState(true)
    useEffect(() => {
+   
+
     handlePatient(()=>{
       setLoading(false)
     })
   
   }, [])
+
   
   const handlePatient=async (clbk)=>{
     
@@ -51,7 +57,7 @@ function Patient() {
       <div>
       <h1>Name: {patientInfo[0]?patientInfo[0]:'Set Name'}</h1>
       <h1>Age: {parseInt(patientInfo[1])!==0?patientInfo[1]:'Set Age'}</h1>
-      <h1>Name: {patientInfo[2].length!==0?patientInfo[2]:'Set DataAddress'}</h1>
+      <h1>Number of Record: {patientInfo[3].length!==0?patientInfo[3].length:'Set DataAddress'}</h1>
       </div>
       <button onClick={()=>{
         navigate('/edit',{state:patientInfo})
