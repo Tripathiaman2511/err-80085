@@ -9,6 +9,7 @@ import Patient from './components/Patient';
 import MedicalHistory from './components/MedicalHistory';
 import Diagnosis from './components/Diagnosis';
 import Navbar from './components/Navbar';
+import EditUser from './components/EditUser';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
              <Route path='mhistory' element={<MedicalHistory/>}/>
              <Route path='diagnosis' element={<Diagnosis/>}/>
              </Route>  
+              <Route path='/edit' element={<EditUser/>}/>
+            
            </Routes>
            
               </Login>

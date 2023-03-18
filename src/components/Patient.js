@@ -5,7 +5,7 @@ function Patient() {
   const location =useLocation()
   const[patient,setPatient]=useState(location.state.patientInfo)
   const navigate=useNavigate()
-  console.log(patient)
+ 
   return (
     <>
     <div>
@@ -15,8 +15,9 @@ function Patient() {
       <h1>Name: {patient[2].length!==0?patient[2]:'Set DataAddress'}</h1>
       </div>
       <button onClick={()=>{
-        navigate('/patient/edit',{state:{}})
-      }}>Edit Data</button>      
+        navigate('/edit',{state:patient})
+      }}>Edit Data 
+        </button>      
     </div>
     <div>
         <NavLink to='/patient/mhistory'>Medical History</NavLink>
