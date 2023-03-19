@@ -18,7 +18,6 @@ function Patient() {
   const navigate=useNavigate()
   const {user}=useContext(DataContext)
   const[patientInfo,setPatientInfo]=useState()
-  
   const [loading,setLoading]=useState(true)
 
    useEffect(() => { 
@@ -28,7 +27,6 @@ function Patient() {
     })
   }, [])
 
-  //Get Doctors
 
 
   //get Patients Details
@@ -65,44 +63,26 @@ function Patient() {
  
   return (
     <>
-    <div className='flex flex-row '>
-    <div className=" h-screen sw-1/3 bg-primary flex flex-col pl-2 pr-1">
-          <div className="inset-0 flex items-center justify-center w-full mt-4">
-            <SideBarIcon icon={<TbReport className="mr-2 stroke-white " size="50"/>}/>
-          <div className="text-white font-sans text-6xl my-7">EHR</div>
-        </div>
-        <div className="inset-0 flex items-center justify-center w-full mt-4">
-          <div className="bg-white rounded-lg p-4 shadow-xl mx-4 w-full">
-            <div className="font-bold text-lg mb-2">Patient Details</div>
-            <p className="text-gray-700 text-base">Name: {patientInfo[0]?patientInfo[0]:'Set Name'}  </p>
-            <p className="text-gray-700 text-base">Address: {user} </p>
-            <p className="text-gray-700 text-base">Age: {parseInt(patientInfo[1])!==0?patientInfo[1]:'Set Age'} </p>
-            <p className="text-gray-700 text-base">Number of Record: {patientInfo[3].length!==0?patientInfo[3].length:'Set DataAddress'}</p>
+    <div className='flex flex-row m-2 w-max'>
+    <div className="w-[32rem]">
+         <div className=" bg-slate-900 text-white text-lg py-4 px-2">
+            <p className='font-semibold '>Name:<span className='text-slate-300 font-normal ml-2'>  {patientInfo[0]?patientInfo[0]:'Undefined'} </span> </p>
+            <p className="">Address: <span className='text-slate-300 font-normal ml-2'> {user}</span> </p>
+            <p className="">Age: <span className='text-slate-300 font-normal ml-2'> {parseInt(patientInfo[1])!==0?patientInfo[1]:'Undefined'}</span> </p>
+            <p className="">Number of Record: <span className='text-slate-300 font-normal ml-2'> {patientInfo[3].length!==0?patientInfo[3].length:'0'}</span></p>
+            <div className='flex flex-row justify-end'>
+             <button className='bg-blue-500  py-2 px-4 mt-4 mr-4 ' onClick={()=>{ navigate('/edit',{state:{patientInfo,type:'Patient'}}) }}>Edit Data  </button> 
+            </div>
           </div>
-        </div>
-        <div className="inset-0 flex flex-col items-start justify-center w-full">
-        <div className="bg-white rounded-lg p-4 mt-4 shadow-md mx-4 w-fit font-bold text-center cursor-pointer">
-      <button onClick={()=>{
-        navigate('/edit',{state:{patientInfo,type:'Patient'}})
-      }}>Edit Data  </button> 
-        </div> 
-        <div className="bg-white rounded-lg p-4 mt-4 shadow-md mx-4 w-fit font-bold text-center cursor-pointer">
-        <NavLink className="flex items-center justify-start" to='/patient/mhistory'>
-        <SideBarIcon icon={<TbReportMedical className="mr-2" size="22"/>}/>
-        Medical History
-        
-        </NavLink>
-        
-          </div>
-          <div className="bg-white rounded-lg p-4 mt-4 shadow-md mx-4 w-fit font-bold text-center cursor-pointer">
-          <NavLink className="flex items-center justify-start" to='/patient/diagnosis'>
-          <SideBarIcon icon={<RiStethoscopeLine className="mr-2" size="22"/>}/>
-            Diagnosis</NavLink>
+       
+        <div className='w-full mt-[1rem] text-white bg-slate-900 py-[7rem] text-xl flex flex-col '>
+        <NavLink className="w-[12rem] text-center mx-auto p-4 bg-slate-500 hover:bg-blue-500" to='/patient/mhistory'>Medical History</NavLink>
+        <NavLink className="w-[12rem] text-center mt-4 mx-auto p-4 bg-slate-500 hover:bg-blue-500" to='/patient/diagnosis'>Diagnosis</NavLink>
 
-          </div>    
         </div>
-  </div>
-  <Outlet/>
+      
+    </div>
+    <Outlet/>
 </div>
     
     </>
