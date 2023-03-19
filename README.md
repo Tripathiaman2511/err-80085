@@ -2,7 +2,7 @@
 ## Clone Project
 Clone this repository anywhere in your system
 ```bash
-$ git clone https://github.com/Tripathiaman2511/err-80085.git
+git clone https://github.com/Tripathiaman2511/err-80085.git
 ```
 ## Folder Structure
 When done with above command, the project folder should look like this
@@ -30,7 +30,7 @@ npm install -g truffle
 ```
 After installing Truffle, use the following command to see the version of Truffle and it's dependencies
 ```bash
-$ truffle -v
+truffle -v
 ```
 As of March 2023, the above command gave the following output
 ```bash
@@ -44,6 +44,6 @@ Web3.js v1.8.2
 ## Run Project
 Considering you are done with the above commands successfully and are in the project directory, the following command will run the project/app in the development mode. Open [http://localhost:3000](http://localhost:3000/) to view it in the browser.
 ```bash
-$ npm start
+npm start
 ```
 
