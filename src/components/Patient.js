@@ -18,15 +18,20 @@ function Patient() {
   const navigate=useNavigate()
   const {user}=useContext(DataContext)
   const[patientInfo,setPatientInfo]=useState()
+  
   const [loading,setLoading]=useState(true)
 
    useEffect(() => { 
+    
     handlePatient(()=>{
       setLoading(false)
     })
   }, [])
 
-  
+  //Get Doctors
+
+
+  //get Patients Details
   const handlePatient=async (clbk)=>{
     
     const web3 =new Web3(window.ethereum)
@@ -51,6 +56,8 @@ function Patient() {
    
   
    }
+
+
    if(loading){
     return(<>Loading...</>)
    }
@@ -76,7 +83,7 @@ function Patient() {
         <div className="inset-0 flex flex-col items-start justify-center w-full">
         <div className="bg-white rounded-lg p-4 mt-4 shadow-md mx-4 w-fit font-bold text-center cursor-pointer">
       <button onClick={()=>{
-        navigate('/edit',{state:patientInfo})
+        navigate('/edit',{state:{patientInfo,type:'Patient'}})
       }}>Edit Data  </button> 
         </div> 
         <div className="bg-white rounded-lg p-4 mt-4 shadow-md mx-4 w-fit font-bold text-center cursor-pointer">

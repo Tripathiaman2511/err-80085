@@ -19,14 +19,66 @@ function MedicalHistory() {
     const [file,setFile]=useState()
     const[fileName,setFileName]=useState()
     const[description,setDescription]=useState('')
-
+    const[doctors,setDoctors]=useState([])
     useEffect(()=>{
+      getDoctors((newArr)=>{
+        console.log(newArr)
+        setDoctors(newArr)
+      })
+
       getRecord((newArr)=>{
         console.log(newArr)
         setRecord(newArr)
       })
     },[])
 
+    const getDoctors=async(clbk)=>{
+      let newArray=[]
+      const web3 =new Web3(window.ethereum)
+      const networkId =await web3.eth.net.getId()
+      const networkData=Application.networks[networkId]
+      if(networkData){
+         
+          const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
+         const doctorInfo=await getAccount.methods.getDoctors().call()
+         if(doctorInfo){
+            console.log(doctorInfo[0][0])
+          for(let i=0;i<doctorInfo[0].length;i++){
+           var newObj={}
+            
+             newObj.name=doctorInfo[0][i]
+             newObj.age=doctorInfo[1][i]
+             newObj.desc=doctorInfo[2][i]
+             newObj.hash=doctorInfo[3][i]
+           newArray.push(newObj)
+          }
+          
+         }
+        clbk(newArray)
+      }else{
+         window.alert("Application contract not deployed to detected network")
+      }
+     
+  
+    }
+
+    // Send Data User
+    const sendData=async(value)=>{
+
+      const web3 =new Web3(window.ethereum)
+      const networkId =await web3.eth.net.getId()
+      const networkData=Application.networks[networkId]
+      if(networkData){
+         console.log(doctors)
+          const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
+         await getAccount.methods.sendRecord(doctors[0].hash,value.hash,value.desc).send({from:user})
+         .on("transactionHash",(hash)=>{
+          console.log(hash)
+        })
+        
+        }
+    }
+    
     const getRecord=async(clbk)=>{
       let newArray=[]
       const web3 =new Web3(window.ethereum)
@@ -57,6 +109,7 @@ function MedicalHistory() {
       clbk(newArray)
       
     }
+
     const fileToBuffer = (file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -70,14 +123,14 @@ function MedicalHistory() {
         reader.readAsArrayBuffer(file);
       });
     };
+
+
     const handleChange=async (event)=>{
-            
-     
       setFileName(event.target.files[0].name)
       const buffer = await fileToBuffer(event.target.files[0]);
       setFile(buffer)
-
     }
+
     const getCId=async(clbk)=>{
       const ipfs = await IPFS.create({repo: 'ok' + Math.random()});
       const { cid } = await ipfs.add(file);
@@ -86,6 +139,7 @@ function MedicalHistory() {
       const hashCode=arrayFile.pop()
      clbk(hashCode)
     }
+    
     const upload=async(code)=>{
       const web3 =new Web3(window.ethereum)
      const networkId =await web3.eth.net.getId()
@@ -103,10 +157,7 @@ function MedicalHistory() {
     }
     }
 
-    // Send Data User
-    const sendData=async(value)=>{
-      console.log("Need a doctor Side")
-    }
+
   return (
     <>
     <div className="h-full min-h-screen w-2/3 bg-light-sec flex flex-col pr-2 pl-1">
@@ -122,7 +173,8 @@ function MedicalHistory() {
           <NavLink target='_blank' to={'https://ipfs.io/ipfs/'+value.hash}>
           <h1 className="font-bold text-lg w-auto " >{value.fileName}</h1>
           </NavLink>
-          <button onClick={(value)=>sendData(value)}> <SideBarIcon className="" icon={<AiOutlineShareAlt size="27"/>}/></button>
+          <button onClick={()=>{console.log(value)
+                 sendData(value)}}> <SideBarIcon className="" icon={<AiOutlineShareAlt size="27"/>}/></button>
         </div>)
       })):(<>No Data Found</>)}
     </div>
