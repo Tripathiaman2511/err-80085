@@ -17,9 +17,18 @@ function Login({children}) {
           
         const accounts=await web3.eth.getAccounts()
         console.log(accounts)
+        if(accounts[0]){
+          console.log(accounts[0])
           setUser(accounts[0])
           setLoading(false)
           setIsUser(true)
+        }
+          else{
+            setLoading(false)
+          setIsUser(false)
+          }
+          
+          
         
         
         
@@ -38,7 +47,7 @@ function Login({children}) {
 
     if(loading){return(<>Loading</>)}
     if(!loading && !isUser){
-        return(<>Install MetaMask!</>)
+        return(<>No user!</>)
     }
 
   return (

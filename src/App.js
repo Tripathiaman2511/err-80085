@@ -11,6 +11,7 @@ import Diagnosis from './components/Diagnosis';
 import Navbar from './components/Navbar';
 import EditUser from './components/EditUser';
 import NotFound from './components/NotFound';
+import Doctor from './components/Doctor';
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
              <Route path='/patient' element={<Patient/>}>
              <Route path='mhistory' element={<MedicalHistory/>}/>
              <Route path='diagnosis' element={<Diagnosis/>}/>
-             </Route>  
+             </Route> 
+             <Route path='/doctor' element={<Doctor/>}/> 
              <Route path="*" element={<NotFound/>}/>
               <Route path='/edit' element={<EditUser/>}/>
             

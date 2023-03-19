@@ -10,6 +10,7 @@ function Doctor() {
   const {user}=useContext(DataContext)
   const[doctorInfo,setDoctorInfo]=useState()
   const [loading,setLoading]=useState(true)
+  
    useEffect(() => {
    
 
@@ -19,7 +20,22 @@ function Doctor() {
   
   }, [])
 
-  
+  //get requested file
+  const getRequestedData=async()=>{
+    const web3 =new Web3(window.ethereum)
+    const networkId =await web3.eth.net.getId()
+    const networkData=Application.networks[networkId]
+    if(networkData){
+       
+        const getAccount=new web3.eth.Contract(Application.abi,networkData.address)
+       const reqData=await getAccount.methods.getDoctorsRequestedData().call({from:user})
+     if(reqData){
+      console.log(reqData)
+     
+    }
+  }
+
+  }
   const handleDoctor=async (clbk)=>{
     
     const web3 =new Web3(window.ethereum)
@@ -58,11 +74,12 @@ function Doctor() {
       {/* <h1>Number of Record: {doctorInfo[3].length!==0?doctorInfo[3].length:'Set DataAddress'}</h1> */}
       </div>
       <button onClick={()=>{
-        navigate('/edit',{state:doctorInfo})
+        navigate('/edit',{state:{doctorInfo,type:'Doctor'}})
       }}>Edit Data 
         </button>      
     </div>
     <div>
+      <button onClick={getRequestedData}>GetData</button>
         {/* <NavLink to='/patient/mhistory'>Medical History</NavLink>
         <NavLink to='/patient/diagnosis'>Diagnosis</NavLink> */}
     </div>
