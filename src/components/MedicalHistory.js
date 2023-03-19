@@ -79,7 +79,7 @@ function MedicalHistory() {
 
     }
     const getCId=async(clbk)=>{
-      const ipfs = await IPFS.create();
+      const ipfs = await IPFS.create({repo: 'ok' + Math.random()});
       const { cid } = await ipfs.add(file);
       const ipfsUrl = `https://ipfs.io/ipfs/${cid}`;
       const arrayFile=ipfsUrl.split('/')
