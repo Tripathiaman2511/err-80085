@@ -160,33 +160,40 @@ function MedicalHistory() {
 
   return (
     <>
-    <div className="h-full min-h-screen w-2/3 bg-light-sec flex flex-col pr-2 pl-1">
-     <div  className="inset-0 flex flex-col items-center justify-center w-full mt-4 px-4">
-     <div className="flex flex-row  rounded-lg p-4 mx-4 w-full max-h-16 mt-4">
-          <div className="font-bold text-xl w-auto ">Patient's past documents</div>
-        </div>
-     </div>
-      <div>
+    <div className="w-full m-2  ">
+      
+          <div className="text-2xl font-bold">Patient's past documents</div>
+      <div className='p-4 h-[25rem] bg-slate-200 overflow-y-auto'>
       {record?(record.map((value)=>{
         return (
-        <div className="flex flex-row justify-between bg-white rounded-lg p-4 shadow-md mx-4 w-full max-h-16 mt-4" key={value.hash}>
-          <NavLink target='_blank' to={'https://ipfs.io/ipfs/'+value.hash}>
-          <h1 className="font-bold text-lg w-auto " >{value.fileName}</h1>
-          </NavLink>
-          <button onClick={()=>{console.log(value)
+         
+             <div className=" flex flex-row w-[42rem] mx-auto  my-2 p-2 justify-between  bg-blue-200" key={value.hash}>
+              
+          <h1 className="" >{value.fileName}</h1>
+          <div>
+          <NavLink key={value.hash} target='_blank' to={'https://ipfs.io/ipfs/'+value.hash}>View</NavLink>
+          <button onClick={(event)=>{
+            event.stopPropagation()
+            console.log(value)
                  sendData(value)}}> <SideBarIcon className="" icon={<AiOutlineShareAlt size="27"/>}/></button>
-        </div>)
+          </div>
+          
+        </div>
+          
+       )
       })):(<>No Data Found</>)}
-    </div>
-    </div>
-    <div>
+
+      </div>
+      <div className="w-[15rem] flex flex-col">
     <h1>Upload File</h1>
-    <input type="file"  onChange={handleChange} />
-    <input type="text" onChange={(event)=>{
+    <input type="file" className='bg-blue-200 '  onChange={handleChange} />
+    <input type="text" className='mt-2 border border-solid border-black w-[15rem] text-xl p-2 ' onChange={(event)=>{
       setDescription(event.target.value)
     }} />
-    <button onClick={()=>getCId(upload)}>Upload</button>
+    <button className='bg-blue-300 py-2 mt-2'  onClick={()=>getCId(upload)}>Upload</button>
    </div>
+    </div>
+    
     </>
   )
 }

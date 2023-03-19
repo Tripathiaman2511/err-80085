@@ -8,21 +8,21 @@ function Option() {
 
   return (
     <>
-<div className="flex flex-row">
-      <div class="h-screen m-0 w-2/3 flex flex-col text-right justify-center bg-white-500 text-primary shadow-2xl">
-        <p className="text-7xl font-semibold font-mono mr-9 px-9 py-3">Electronic Health Record</p>
-        <p className="text-xl font-mono mr-9 px-9 py-3">Anim consectetur non labore fugiat proident velit voluptate cillum ut. Cupidatat consequat qui sint dolor sit ea.</p>
+<div className="m-4 flex flex-row">
+      <div class="w-1/2 mt-[15rem] ">
+        <p className="w-fit text-4xl text-black font-bold mx-auto">ELECTRONIC HEALTH RECORD</p>
+        <p className="w-[40rem] text-lg text-slate-500 mx-auto text-center">Health Record Management System powered by web3 technology.</p>
       </div>
-      <div className="h-screen m-0 w-1/3 flex flex-col items-left justify-center bg-primary pl-16">
-        <div className="flex align-left pl-3">
-          <div className="my-5 font-mono text-3xl shadow-xl bg-white p-6 rounded-md drop-shadow-xl cursor-pointer">
-            <NavLink className="text-primary" to='/patient'>Patient</NavLink>
-          </div>
-        </div>
-        <div className="flex align-left pl-3">
-          <div className="my-5 font-mono text-3xl shadow-xl bg-white p-6 rounded-md drop-shadow-xl cursor-pointer">
-            <NavLink className="text-primary"  to='/doctor'>Doctor</NavLink>
-          </div>
+      <div className="w-1/2 mt-[6rem]">
+        <div className='w-fit flex flex-col mx-auto '>
+        <NavLink className="text-primary w-[40rem] py-[5rem] bg-slate-400 hover:bg-black hover:text-white  "  to='/patient'>
+          <h1 className='text-center text-4xl '>Patient</h1>
+
+          </NavLink>
+        <NavLink className="text-primary w-[40rem] py-[5rem] bg-slate-400 mt-[2rem]  hover:bg-black hover:text-white  " to='/doctor'>
+        <h1 className='text-center text-4xl '>Doctor</h1>
+        </NavLink>
+      
         </div>
       </div>
     </div>
