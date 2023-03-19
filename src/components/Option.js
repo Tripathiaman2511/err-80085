@@ -15,11 +15,11 @@ function Option() {
       </div>
       <div className="w-1/2 mt-[6rem]">
         <div className='w-fit flex flex-col mx-auto '>
-        <NavLink className="text-primary w-[40rem] py-[5rem] bg-slate-400 hover:bg-black hover:text-white  "  to='/patient'>
+        <NavLink className="text-slate-700 w-[40rem] py-[5rem] bg-slate-400 hover:bg-black hover:text-white  "  to='/patient'>
           <h1 className='text-center text-4xl '>Patient</h1>
 
           </NavLink>
-        <NavLink className="text-primary w-[40rem] py-[5rem] bg-slate-400 mt-[2rem]  hover:bg-black hover:text-white  " to='/doctor'>
+        <NavLink className="text-slate-700 w-[40rem] py-[5rem] bg-slate-400 mt-[2rem]  hover:bg-black hover:text-white  " to='/doctor'>
         <h1 className='text-center text-4xl '>Doctor</h1>
         </NavLink>
       

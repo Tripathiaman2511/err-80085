@@ -160,18 +160,18 @@ function MedicalHistory() {
 
   return (
     <>
-    <div className="w-full m-2  ">
+    <div className="w-[62rem] p-2 ml-2 bg-slate-300">
       
-          <div className="text-2xl font-bold">Patient's past documents</div>
-      <div className='p-4 h-[25rem] bg-slate-200 overflow-y-auto'>
-      {record?(record.map((value)=>{
+          <div className="text-3xl font-bold text-center">Medical History</div>
+      <div className='h-[20rem] bg-slate-500 overflow-y-auto m-2'>
+        {record?(record.map((value)=>{
         return (
          
-             <div className=" flex flex-row w-[42rem] mx-auto  my-2 p-2 justify-between  bg-blue-200" key={value.hash}>
+             <div className=" flex flex-row justify-between bg-white p-2 mx-[4rem] mt-[1rem]  " key={value.hash}>
               
-          <h1 className="" >{value.fileName}</h1>
-          <div>
-          <NavLink key={value.hash} target='_blank' to={'https://ipfs.io/ipfs/'+value.hash}>View</NavLink>
+            <h1 className="" >{value.fileName}</h1>
+          <div className='w-[7rem] flex flex-row justify-between'>
+          <NavLink  key={value.hash} target='_blank' to={'https://ipfs.io/ipfs/'+value.hash}>View</NavLink>
           <button onClick={(event)=>{
             event.stopPropagation()
             console.log(value)
@@ -184,14 +184,14 @@ function MedicalHistory() {
       })):(<>No Data Found</>)}
 
       </div>
-      <div className="w-[15rem] flex flex-col">
-    <h1>Upload File</h1>
-    <input type="file" className='bg-blue-200 '  onChange={handleChange} />
-    <input type="text" className='mt-2 border border-solid border-black w-[15rem] text-xl p-2 ' onChange={(event)=>{
-      setDescription(event.target.value)
-    }} />
-    <button className='bg-blue-300 py-2 mt-2'  onClick={()=>getCId(upload)}>Upload</button>
-   </div>
+      <div className="w-fit mx-auto  flex flex-col">
+
+        
+        <input type="file" className='my-2'  onChange={handleChange} />
+        <input type="text" className='w-[14rem] h-[4rem]  my-2' onChange={(event)=>{setDescription(event.target.value)}} />
+        
+        <button className='bg-blue-500  py-2 px-2 w-[14rem] mt-4 mr-4 text-white '  onClick={()=>getCId(upload)}>Upload</button>
+      </div>
     </div>
     
     </>
