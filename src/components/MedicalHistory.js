@@ -4,6 +4,14 @@ import { Buffer } from 'buffer'
 import { DataContext } from './Login'
 import Web3 from 'web3'
 import Application from '../abis/Account.json'
+import { AiOutlineCloudDownload, AiOutlineShareAlt, AiOutlineCloudUpload } from "react-icons/ai";
+import { NavLink } from 'react-router-dom'
+
+const SideBarIcon = ({icon}) => (
+  <div className="sideBar-icon">
+    {icon}
+  </div>
+)
 function MedicalHistory() {
 
   const {user}=useContext(DataContext)
@@ -87,6 +95,10 @@ function MedicalHistory() {
       await getAccount.methods.addRecord(fileName,code,description).send({from:user})
       .on("transactionHash",(hash)=>{
         console.log(hash)
+        getRecord((newArr)=>{
+          console.log(newArr)
+          setRecord(newArr)
+        })
       })
     }
     }
@@ -97,17 +109,22 @@ function MedicalHistory() {
     }
   return (
     <>
-    <div>
-    <h1>Medical History</h1>
-    <div>
-        {/* Add map function to read all files  */}
-   {record?(record.map((value)=>{
-    return (
-    <div key={value.hash}>
-      <h1>{value.hash}</h1>
-      <button onClick={(value)=>sendData(value)}>SendData</button>
-    </div>)
-   })):(<>No Data Found</>)}
+    <div className="h-full min-h-screen w-2/3 bg-light-sec flex flex-col pr-2 pl-1">
+     <div  className="inset-0 flex flex-col items-center justify-center w-full mt-4 px-4">
+     <div className="flex flex-row  rounded-lg p-4 mx-4 w-full max-h-16 mt-4">
+          <div className="font-bold text-xl w-auto ">Patient's past documents</div>
+        </div>
+     </div>
+      <div>
+      {record?(record.map((value)=>{
+        return (
+        <div className="flex flex-row justify-between bg-white rounded-lg p-4 shadow-md mx-4 w-full max-h-16 mt-4" key={value.hash}>
+          <NavLink target='_blank' to={'https://ipfs.io/ipfs/'+value.hash}>
+          <h1 className="font-bold text-lg w-auto " >{value.fileName}</h1>
+          </NavLink>
+          <button onClick={(value)=>sendData(value)}> <SideBarIcon className="" icon={<AiOutlineShareAlt size="27"/>}/></button>
+        </div>)
+      })):(<>No Data Found</>)}
     </div>
     </div>
     <div>
