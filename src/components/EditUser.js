@@ -44,30 +44,30 @@ function EditUser() {
     }
   return (
     <>
-    <div>
+    <div className='m-2 bg-slate-300 w-[32rem] mx-auto mt-[12rem] text-xl  flex flex-col '>
         
        
         {
             userData.type==='Doctor'?(
 
                 <>
-                <div>
-                <h1>Name: {userData.doctorInfo[0]}</h1>
-        <input type="text" event={user[0]} onChange={(event)=>{
+                <div className='w-fit mx-auto'>
+                <h1 className='w-fit mx-auto'>Name: {userData.doctorInfo[0]}</h1>
+        <input type="text" placeholder='Add name' className='p-2 border border-solid border-black' event={user[0]} onChange={(event)=>{
             event.preventDefault()
             setName(event.target.value)
         }} />
                 </div>
-                <div>
-                <h2>Age: {parseInt(userData.doctorInfo[1])}</h2>
-        <input type="text" event={user[1]} onChange={(event)=>{
+                <div className='w-fit mx-auto'>
+                <h2 className='w-fit mx-auto'>Age: {parseInt(userData.doctorInfo[1])}</h2>
+        <input type="text" placeholder='Add Age' className='p-2 border border-solid border-black' event={user[1]} onChange={(event)=>{
             event.preventDefault()
             setAge(event.target.value)
         }} />
                 </div>
-                <div>
-                <h2>Desc: {userData.doctorInfo[2]}</h2>
-        <input type="text" event={user[1]} onChange={(event)=>{
+                <div className='w-fit mx-auto' >
+                <h2 className='w-fit mx-auto'>Desc: {userData.doctorInfo[2]}</h2>
+        <input type="text" placeholder='Add Description' className='p-2 border border-solid border-black' event={user[1]} onChange={(event)=>{
             event.preventDefault()
             setDesc(event.target.value)
         }} />
@@ -77,16 +77,16 @@ function EditUser() {
                 </>
             ):(
                 <>
-                 <div>
-                <h1>Name: {userData.patientInfo[0]}</h1>
-        <input type="text" event={user[0]} onChange={(event)=>{
+                 <div className='w-fit mx-auto'>
+                <h1 className='w-fit mx-auto'>Name: {userData.patientInfo[0]}</h1>
+        <input type="text" placeholder='Add name' className='p-2 border border-solid border-black' event={user[0]} onChange={(event)=>{
             event.preventDefault()
             setName(event.target.value)
         }} />
                 </div>
-                <div>
-                <h2>Age: {parseInt(userData.patientInfo[1])}</h2>
-        <input type="text" event={user[1]} onChange={(event)=>{
+                <div className='w-fit mx-auto'>
+                <h2 className='w-fit mx-auto'>Age: {parseInt(userData.patientInfo[1])}</h2>
+        <input type="text"  placeholder='Add Age' className='p-2 border border-solid border-black' event={user[1]} onChange={(event)=>{
             event.preventDefault()
             setAge(event.target.value)
         }} />
@@ -95,7 +95,7 @@ function EditUser() {
             )
         }
 
-        <button onClick={submit}>Submit</button>
+        <button className='w-[16rem] text-white mb-2 mx-auto bg-blue-500  py-2 px-4 mt-4 ' onClick={submit}>Submit</button>
     </div>
     </>
   )
