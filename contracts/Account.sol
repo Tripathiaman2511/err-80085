@@ -222,6 +222,13 @@ contract Account{
 
         return (_fileName,_ipfsHash,_fileDesc,_doctorName,_desc,_age);
     }   
+    // function cancelDiagnose(string memory _diagnoseHash) public {
+        
+    // }
+
+    // function sendDiagnosis(string memory _diagnoseHash) public {
+        
+    // }
 
     function deleteRecord(string memory _dataHash) public{
         address _owner = msg.sender;
