@@ -63,13 +63,13 @@ function Patient() {
  
   return (
     <>
-    <div className='flex flex-row m-2 w-full'>
+    <div className='flex flex-row m-2 w-max'>
     <div className="w-[32rem]">
          <div className=" bg-slate-900 text-white text-lg py-4 px-2">
-            <p className="">Name: {patientInfo[0]?patientInfo[0]:'Undefined'}  </p>
-            <p className="">Address: {user} </p>
-            <p className="">Age: {parseInt(patientInfo[1])!==0?patientInfo[1]:'Undefined'} </p>
-            <p className="">Number of Record: {patientInfo[3].length!==0?patientInfo[3].length:'0'}</p>
+            <p className='font-semibold '>Name:<span className='text-slate-300 font-normal ml-2'>  {patientInfo[0]?patientInfo[0]:'Undefined'} </span> </p>
+            <p className="">Address: <span className='text-slate-300 font-normal ml-2'> {user}</span> </p>
+            <p className="">Age: <span className='text-slate-300 font-normal ml-2'> {parseInt(patientInfo[1])!==0?patientInfo[1]:'Undefined'}</span> </p>
+            <p className="">Number of Record: <span className='text-slate-300 font-normal ml-2'> {patientInfo[3].length!==0?patientInfo[3].length:'0'}</span></p>
             <div className='flex flex-row justify-end'>
              <button className='bg-blue-500  py-2 px-4 mt-4 mr-4 ' onClick={()=>{ navigate('/edit',{state:{patientInfo,type:'Patient'}}) }}>Edit Data  </button> 
             </div>

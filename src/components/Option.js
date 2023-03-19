@@ -9,7 +9,7 @@ function Option() {
   return (
     <>
 <div className="m-4 flex flex-row">
-      <div class="w-1/2 mt-[15rem] ">
+      <div className="w-1/2 mt-[15rem] ">
         <p className="w-fit text-4xl text-black font-bold mx-auto">ELECTRONIC HEALTH RECORD</p>
         <p className="w-[40rem] text-lg text-slate-500 mx-auto text-center">Health Record Management System powered by web3 technology.</p>
       </div>

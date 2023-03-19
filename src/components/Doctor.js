@@ -67,11 +67,12 @@ function Doctor() {
  
   return (
     <>
-    <div  className='flex flex-row m-2 w-full'>
+    <div  className='flex flex-row m-2 w-max'>
       <div className="w-[32rem]" >
         <div className=" bg-slate-900 text-white text-lg py-4 px-2" >
-          <h1>Name: {doctorInfo[0]?doctorInfo[0]:'Set Name'}</h1>
-          <h1>Age: {parseInt(doctorInfo[1])!==0?doctorInfo[1]:'Set Age'}</h1>
+          <h1 className='font-semibold '>Name: <span className='text-slate-300 font-normal ml-2'> {doctorInfo[0]?doctorInfo[0]:'Undefined'}</span></h1>
+          <h1 className='font-semibold '>Age:<span className='text-slate-300 font-normal ml-2'>  {parseInt(doctorInfo[1])!==0?doctorInfo[1]:'0'}</span></h1>
+          <h1 className='font-semibold '>Description: <span className='text-slate-300 font-normal ml-2'>  {doctorInfo[2]!==''?doctorInfo[2]:'UnDefined'}</span></h1>
           <div className='flex flex-row justify-end'>
              <button className='bg-blue-500  py-2 px-4 mt-4 mr-4 ' onClick={()=>{ navigate('/edit',{state:{doctorInfo,type:'Doctor'}}) }}>Edit Data  </button> 
             </div>
@@ -83,12 +84,9 @@ function Doctor() {
   
 
       </div>
-        
-  
-   
-     
-        {/* <NavLink to='/patient/mhistory'>Medical History</NavLink>
-        <NavLink to='/patient/diagnosis'>Diagnosis</NavLink> */}
+      <div>
+       
+      </div>
     </div>
    
     </>
