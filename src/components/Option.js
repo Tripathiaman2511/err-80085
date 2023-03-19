@@ -10,7 +10,7 @@ function Option() {
     <>
   
    <NavLink to='/patient'>Patient</NavLink>
-   <NavLink to='/doctor'></NavLink>
+   <NavLink to='/doctor'>Doctor</NavLink>
         
     
   

@@ -71,7 +71,7 @@ function MedicalHistory() {
 
     }
     const getCId=async(clbk)=>{
-      const ipfs = await IPFS.create();
+      const ipfs = await IPFS.create({repo: 'ok' + Math.random()});
       const { cid } = await ipfs.add(file);
       const ipfsUrl = `https://ipfs.io/ipfs/${cid}`;
       const arrayFile=ipfsUrl.split('/')
@@ -96,8 +96,14 @@ function MedicalHistory() {
     <h1>Medical History</h1>
     <div>
         {/* Add map function to read all files  */}
-    <h3>Record Name</h3>
-    <button>Share</button>
+ 
+    {record?record.map((item,index)=>{
+      <div index={index}>
+        <div  key="desc">desc: {item.desc}</div>
+        <div key="fileName">filename: {item.fileName}</div>
+        <div key="hash" hash={item.hash}></div>
+      </div>
+  }):<div></div>}
     </div>
     </div>
     <div>
